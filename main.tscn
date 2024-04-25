@@ -1,23 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck0qq0hyw2duf"]
+[gd_scene load_steps=4 format=3 uid="uid://ck0qq0hyw2duf"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_nrivp"]
+[ext_resource type="Texture2D" uid="uid://jhxm5e0njkgt" path="res://BG 2.0/BG/battleback10.png" id="2_1ghpv"]
+[ext_resource type="FontFile" uid="uid://8ecr73flmji3" path="res://fonts/NESCyrillic.ttf" id="3_thnt5"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_nrivp")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1154.0
+offset_bottom = 655.0
+texture = ExtResource("2_1ghpv")
+expand_mode = 2
+
 [node name="Play" type="Button" parent="."]
-offset_left = 379.0
-offset_top = 82.0
-offset_right = 735.0
-offset_bottom = 265.0
+offset_left = 117.0
+offset_top = 315.0
+offset_right = 473.0
+offset_bottom = 498.0
 text = "Play"
 
 [node name="Exit_Quit" type="Button" parent="."]
-offset_left = 385.0
-offset_top = 413.0
-offset_right = 741.0
-offset_bottom = 596.0
+offset_left = 671.0
+offset_top = 320.0
+offset_right = 1027.0
+offset_bottom = 503.0
 text = "Exit/Quit"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(579, 328)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 280.0
+offset_top = 63.0
+offset_right = 850.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource("3_thnt5")
+theme_override_font_sizes/font_size = 50
+text = "Project Era"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Exit_Quit" to="." method="_on_exit_quit_pressed"]
