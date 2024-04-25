@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bejylyhoj8nrq"]
+
+[ext_resource type="Script" path="res://Resource/BaseEnemy.gd" id="1_h2ehr"]
+[ext_resource type="Texture2D" uid="uid://boqowwh7lr6dx" path="res://Fantasy Battlers - Free/Fantasy Battlers - Free/Original size/06.png" id="2_w306o"]
+
+[resource]
+script = ExtResource("1_h2ehr")
+name = "Imp"
+texture = ExtResource("2_w306o")
+health = 30
+damage = 10

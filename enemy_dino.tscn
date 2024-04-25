@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://co8nlo2geb26v"]
+
+[ext_resource type="Script" path="res://Player/enemy_dino.gd" id="1_jsatj"]
+[ext_resource type="Texture2D" uid="uid://baof1rmcricj0" path="res://dinoCharactersVersion1.1/sheets/DinoSprites - doux.png" id="1_qmml8"]
+[ext_resource type="Script" path="res://States/EnemyIdle.gd" id="3_ehgxi"]
+[ext_resource type="Script" path="res://States/State Machine.gd" id="3_k7cms"]
+[ext_resource type="Script" path="res://States/EnemyFollow.gd" id="5_gep3q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f2iv4"]
+radius = 16.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_3nkev"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mnsoy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ed3wc"]
+_data = {
+"Idle": SubResource("Animation_3nkev"),
+"RESET": SubResource("Animation_mnsoy")
+}
+
+[node name="EnemyDino" type="CharacterBody2D"]
+script = ExtResource("1_jsatj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_f2iv4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.875001, -1)
+scale = Vector2(1.46739, 1.41667)
+texture = ExtResource("1_qmml8")
+hframes = 25
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ed3wc")
+}
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_k7cms")
+initial_state = NodePath("Follow")
+
+[node name="Follow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_gep3q")
+enemy = NodePath("../..")
+
+[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("3_ehgxi")
+enemy = NodePath("../..")
